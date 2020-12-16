@@ -1,20 +1,12 @@
 export class Process {
   private id: number;
   private size: number;
-  private segmentId: number;
   private address: number;
   private section: number;
 
-  constructor(
-    id: number,
-    size: number,
-    segmentId: number,
-    address: number,
-    section: number
-  ) {
+  constructor(id: number, size: number, address: number, section: number) {
     this.id = id;
     this.size = size;
-    this.segmentId = segmentId;
     this.address = address;
     this.section = section;
   }
@@ -25,10 +17,6 @@ export class Process {
 
   getSize() {
     return this.size;
-  }
-
-  getSegmentId() {
-    return this.segmentId;
   }
 
   getAddress() {
