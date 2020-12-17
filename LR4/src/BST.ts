@@ -15,10 +15,16 @@ export class BinaryTree<H> {
   public findNodeI(key: H): Node<H> | null {
     this.route.push(this.root);
     const ret = this.findNode(this.root, key);
-    console.log(
-      "PATH",
-      this.route.map((n) => n?.key)
-    );
+
+    if (ret === null) {
+      console.log("There is no such node, try again!");
+    } else {
+      console.log(
+        "PATH",
+        this.route.map((n) => n?.key)
+      );
+    }
+    this.route = [];
     return ret;
   }
 
@@ -37,12 +43,13 @@ export class BinaryTree<H> {
     return this.buildTreeUtil(nodes, 0, length - 1);
   }
 
-  private storeBSTNodes(root: Node<H> | null, nodes: Node<H>[]) {
+  public storeBSTNodes(root: Node<H> | null, nodes: Node<H>[]) {
     if (root === null) return;
 
     this.storeBSTNodes(root.left, nodes);
     nodes.push(root);
     this.storeBSTNodes(root.right, nodes);
+    return nodes;
   }
 
   private buildTreeUtil(

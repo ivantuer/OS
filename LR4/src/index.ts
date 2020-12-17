@@ -34,7 +34,7 @@ const userInterface = async (tree: BinaryTree<number>) => {
     });
 
     tree.addNodeI(+key);
-    console.log(JSON.stringify(tree, null, 2));
+    // console.log(JSON.stringify(tree, null, 2));
     return true;
   }
 
@@ -43,11 +43,16 @@ const userInterface = async (tree: BinaryTree<number>) => {
       message: "Select action",
       type: "list",
       name: "key",
-      choices: availableKeys.map((k) => `${k}`),
+      choices: tree
+        .storeBSTNodes(tree.getRoot(), [])
+        ?.map((node) => `${node.key}`) || ["No nodes"],
     });
 
+    if (key === "No nodes") {
+      return true;
+    }
     tree.removeNodeI(+key);
-    console.log(JSON.stringify(tree, null, 2));
+    // console.log(JSON.stringify(tree, null, 2));
     return true;
   }
 
@@ -56,7 +61,9 @@ const userInterface = async (tree: BinaryTree<number>) => {
       message: "Select action",
       type: "list",
       name: "key",
-      choices: availableKeys.map((k) => `${k}`),
+      choices: tree
+        .storeBSTNodes(tree.getRoot(), [])
+        ?.map((node) => `${node.key}`) || ["No nodes"],
     });
 
     console.log(tree.findNodeI(+key));
